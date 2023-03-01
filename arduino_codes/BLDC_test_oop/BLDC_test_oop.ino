@@ -1,5 +1,3 @@
-#include <ros.h>
-#include <std_msgs/Int8.h>
 #include <Servo.h>
 
 #define TFR 9
@@ -50,48 +48,38 @@ BLDC thruster_FR(TFR);
 BLDC thruster_FL(TFL);
 
 
-ros::NodeHandle  nh;
 
-void messageCb( const std_msgs::Int8& toggle_msg){
-  if (toggle_msg.data >2){
-//    digitalWrite(LED_BUILTIN, HIGH-digitalRead(LED_BUILTIN));
-      bldc();
-
-//    
-//    
-  }
-}
-
-ros::Subscriber<std_msgs::Int8> sub("to_arduino", &messageCb );
-
-void setup()
-{ //Other peripheral initialization
+void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
-  digitalWrite(LED_BUILTIN, HIGH);
-  // Thrusters initialization 
+
+    // Thrusters initialization 
   thruster_FR.init();
   thruster_FL.init();
-  // ROS initialization
-  nh.initNode();
-  nh.subscribe(sub);
+  delay(4000);
+  // put your setup code here, to run once:
+
 }
 
-void loop()
-{  
-  nh.spinOnce();
-  delay(1);
+void loop() {
+  // put your main code here, to run repeatedly:
+  bldc();
+  delay(1000);
 }
 
-void bldc()
+
+  void bldc()
 {
     digitalWrite(LED_BUILTIN, HIGH);
     delay(500);  
     thruster_FR.cw();
     thruster_FL.cw();
-    delay(2000);
+    delay(1500);
+    thruster_FR.cw(1450);
+    thruster_FL.cw(1450);
+    delay(500);
     thruster_FR.stp();
     thruster_FL.stp();
-    delay(1000);
+    delay(3000);
     thruster_FR.ccw();
     thruster_FL.ccw();
     delay(2000);
