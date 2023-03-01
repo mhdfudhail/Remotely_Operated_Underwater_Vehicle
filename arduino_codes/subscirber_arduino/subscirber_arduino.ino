@@ -1,6 +1,7 @@
 #include <ros.h>
 #include <std_msgs/Int8.h>
 #include <Servo.h>
+#define TFR 9
 
 
 class BLDC
@@ -37,10 +38,7 @@ class BLDC
 };
 
 
-
-
-
-
+BLDC thruster_FR(TFR);
 
 
 
@@ -57,6 +55,7 @@ ros::Subscriber<std_msgs::Int8> sub("to_arduino", &messageCb );
 void setup()
 { 
   pinMode(LED_BUILTIN, OUTPUT);
+  thruster_FR.init();
   nh.initNode();
   nh.subscribe(sub);
 }
