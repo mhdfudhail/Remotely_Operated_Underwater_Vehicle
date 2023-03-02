@@ -76,7 +76,10 @@ void loop() {
     delay(1500);
     thruster_FR.cw(1450);
     thruster_FL.cw(1450);
-    delay(500);
+    delay(250);
+    thruster_FR.cw(1500);
+    thruster_FL.cw(1500);
+    delay(250);
     thruster_FR.stp();
     thruster_FL.stp();
     delay(3000);
