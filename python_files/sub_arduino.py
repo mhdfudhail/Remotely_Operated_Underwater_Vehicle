@@ -11,7 +11,7 @@ class listner():
     def callback(self,msg):
         self.message = msg.data
         rospy.loginfo("Recieved data: %s", self.message)
-
+	print("hello")
 if __name__ == '__main__':
     lst = listner()
     rate = rospy.Rate(1)
